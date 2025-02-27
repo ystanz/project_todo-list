@@ -1,7 +1,27 @@
+import Task from '../../components/Task'
+import { Container } from './styles'
+
 const TasksList = () => (
-  <main>
+  <Container>
     <p>2 Tarefas marcadas como: &quot;Categoria&quot; e &quot;Termo&quot;</p>
-  </main>
+    <ul>
+      <li>
+        <Task />
+      </li>
+      <li>
+        <Task />
+      </li>
+      <li>
+        <Task />
+      </li>
+      <li>
+        <Task />
+      </li>
+      <li>
+        <Task />
+      </li>
+    </ul>
+  </Container>
 )
 
 export default TasksList
