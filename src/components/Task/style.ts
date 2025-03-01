@@ -4,18 +4,18 @@ import variables from '../../styles/variables'
 import * as enums from '../../utils/enums/Task'
 
 type TagProps = {
-  priority?: enums.Priority
-  status?: enums.Status
-  parameter: 'status' | 'priority'
+  $priority?: enums.Priority
+  $status?: enums.Status
+  $parameter: 'status' | 'priority'
 }
 
 function returnBackgroundColor(props: TagProps): string {
-  if (props.parameter === 'priority') {
-    if (props.priority === enums.Priority.URGENTE) return variables.red
-    if (props.priority === enums.Priority.IMPORTANTE) return variables.yellow2
+  if (props.$parameter === 'priority') {
+    if (props.$priority === enums.Priority.URGENTE) return variables.red
+    if (props.$priority === enums.Priority.IMPORTANTE) return variables.yellow2
   } else {
-    if (props.status === enums.Status.PENDENTE) return variables.yellow
-    if (props.status === enums.Status.CONCLUIDA) return variables.green
+    if (props.$status === enums.Status.PENDENTE) return variables.yellow
+    if (props.$status === enums.Status.CONCLUIDA) return variables.green
   }
   return '#ccc'
 }

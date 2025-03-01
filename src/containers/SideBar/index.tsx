@@ -11,7 +11,7 @@ const SideBar = () => (
         <CardFilter counter={3} caption="urgentes" />
         <CardFilter counter={4} caption="importantes" />
         <CardFilter counter={5} caption="normal" />
-        <CardFilter counter={10} caption="todas" active />
+        <CardFilter counter={10} caption="todas" $active />
       </S.Filters>
     </div>
   </S.Aside>
