@@ -75,9 +75,7 @@ export const Button = styled.button`
   cursor: pointer;
   background-color: #2f3640;
 `
-export const SaveButton = styled(Button)`
-  background-color: ${variables.green};
-`
+
 export const RemoveCancelButton = styled(Button)`
   background-color: ${variables.red};
 `
