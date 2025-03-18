@@ -37,11 +37,21 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     remove: (state, action: PayloadAction<number>) => {
-      state.itens = state.itens.filter((task) => task.id !== action.payload)
+      state.itens = [
+        ...(state.itens = state.itens.filter(
+          (task) => task.id !== action.payload
+        ))
+      ]
+    },
+    edit: (state, action: PayloadAction<Task>) => {
+      const taskIndex = state.itens.findIndex((t) => t.id === action.payload.id)
+      if (taskIndex >= 0) {
+        state.itens[taskIndex] = action.payload
+      }
     }
   }
 })
 
-export const { remove } = tasksSlice.actions
+export const { remove, edit } = tasksSlice.actions
 
 export default tasksSlice.reducer
