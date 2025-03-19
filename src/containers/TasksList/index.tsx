@@ -5,13 +5,13 @@ import { MainContainer, Title } from '../../styles'
 import { RootReducer } from '../../store'
 
 const TasksList = () => {
-  const { itens } = useSelector((state: RootReducer) => state.tasks)
+  const { items } = useSelector((state: RootReducer) => state.tasks)
   const { term, triage, value } = useSelector(
     (state: RootReducer) => state.filter
   )
 
   const tasksFilter = () => {
-    let filteredTasks = itens
+    let filteredTasks = items
     if (term !== undefined) {
       filteredTasks = filteredTasks.filter(
         (item) => item.title.toLowerCase().search(term.toLowerCase()) >= 0
@@ -25,7 +25,7 @@ const TasksList = () => {
 
       return filteredTasks
     } else {
-      return itens
+      return items
     }
   }
 

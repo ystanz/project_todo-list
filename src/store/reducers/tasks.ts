@@ -3,11 +3,11 @@ import Task from '../../models/Task'
 import * as enums from '../../utils/enums/Task'
 
 type TasksState = {
-  itens: Task[]
+  items: Task[]
 }
 
 const initialState: TasksState = {
-  itens: [
+  items: [
     {
       id: 1,
       title: 'Estudar JavaScript',
@@ -37,31 +37,50 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     remove: (state, action: PayloadAction<number>) => {
-      state.itens = [
-        ...(state.itens = state.itens.filter(
+      state.items = [
+        ...(state.items = state.items.filter(
           (task) => task.id !== action.payload
         ))
       ]
     },
     edit: (state, action: PayloadAction<Task>) => {
-      const taskIndex = state.itens.findIndex((t) => t.id === action.payload.id)
+      const taskIndex = state.items.findIndex((t) => t.id === action.payload.id)
       if (taskIndex >= 0) {
-        state.itens[taskIndex] = action.payload
+        state.items[taskIndex] = action.payload
       }
     },
-    register: (state, action: PayloadAction<Task>) => {
-      const taskExist = state.itens.find(
+    register: (state, action: PayloadAction<Omit<Task, 'id'>>) => {
+      const taskExist = state.items.find(
         (task) =>
           task.title.toLowerCase() === action.payload.title.toLowerCase()
       )
 
       if (taskExist) {
         alert('Já existe uma tarefa com esse nome')
-      } else state.itens.push(action.payload)
+      } else {
+        const lastTask = state.items[state.items.length - 1]
+        const newTask = {
+          ...action.payload,
+          id: lastTask ? lastTask.id + 1 : 1
+        }
+        state.items.push(newTask)
+      }
+    },
+    changeStatus: (
+      state,
+      action: PayloadAction<{ id: number; finished: boolean }>
+    ) => {
+      const taskIndex = state.items.findIndex((t) => t.id === action.payload.id)
+
+      if (taskIndex >= 0) {
+        state.items[taskIndex].$status = action.payload.finished
+          ? enums.Status.CONCLUIDA
+          : enums.Status.PENDENTE
+      }
     }
   }
 })
 
-export const { remove, edit, register } = tasksSlice.actions
+export const { remove, edit, register, changeStatus } = tasksSlice.actions
 
 export default tasksSlice.reducer
