@@ -4,8 +4,7 @@ import SideBar from '../../containers/SideBar'
 const Register = () => {
   return (
     <>
-      {/* barra lateral */}
-      <SideBar />
+      <SideBar displayFilters={false} />
       <NewTaskForm />
     </>
   )

@@ -1,11 +1,12 @@
 import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 import { MainContainer, Title, Field, SaveButton } from '../../styles'
 import { Form, Options, Option } from './styles'
 import * as enums from '../../utils/enums/Task'
+
 import { register } from '../../store/reducers/tasks'
-import Task from '../../models/Task'
 
 const NewTaskForm = () => {
   const dispatch = useDispatch()
@@ -13,19 +14,19 @@ const NewTaskForm = () => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [priority, setPriority] = useState(enums.Priority.NORMAL)
+  const [$priority, setPriority] = useState(enums.Priority.NORMAL)
 
   const taskRegister = (event: FormEvent) => {
     event.preventDefault()
-    const taskToAdd = new Task(
-      title,
-      priority,
-      enums.Status.PENDENTE,
-      description,
-      9
-    )
 
-    dispatch(register(taskToAdd))
+    dispatch(
+      register({
+        title,
+        $priority,
+        description,
+        $status: enums.Status.PENDENTE
+      })
+    )
     navigate('/')
   }
   return (

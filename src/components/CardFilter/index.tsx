@@ -12,7 +12,8 @@ export type Props = {
 
 const CardFilter = ({ caption, triage, value }: Props) => {
   const dispatch = useDispatch()
-  const { filter, tasks } = useSelector((state: RootReducer) => state)
+  const tasks = useSelector((state: RootReducer) => state.tasks)
+  const filter = useSelector((state: RootReducer) => state.filter)
 
   const checkIsActive = () => {
     const sameTriage = filter.triage === triage
@@ -22,12 +23,12 @@ const CardFilter = ({ caption, triage, value }: Props) => {
   }
 
   const tasksCounter = () => {
-    if (triage === 'todas') return tasks.itens.length
+    if (triage === 'todas') return tasks.items.length
     if (triage === 'prioridade') {
-      return tasks.itens.filter((item) => item.$priority === value).length
+      return tasks.items.filter((item) => item.$priority === value).length
     }
     if (triage === 'status') {
-      return tasks.itens.filter((item) => item.$status === value).length
+      return tasks.items.filter((item) => item.$status === value).length
     }
   }
 
